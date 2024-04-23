@@ -1,5 +1,6 @@
 package com.netocalegari.springbootmongobd.resources;
 
+import com.netocalegari.springbootmongobd.domain.Post;
 import com.netocalegari.springbootmongobd.domain.User;
 import com.netocalegari.springbootmongobd.dto.UserDTO;
 import com.netocalegari.springbootmongobd.services.UserService;
@@ -59,5 +60,12 @@ public class UserResource {
         obj = service.update(obj);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+
+        return ResponseEntity.ok().body(obj.getPosts() );
     }
 }
